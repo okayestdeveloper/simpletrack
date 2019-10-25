@@ -28,16 +28,16 @@ export interface SaveableModel {
   save: () => Promise<BaseModel>;
 }
 
-export interface DeleteableModel {
-  delete: () => Promise<any>;
-}
-
 export class ModelFactory {
   static load(id: string): Promise<BaseModel> {
     throw new Error('This is my hacky static abstract BS');
   }
 
   static loadList(params = {}): Promise<BaseModel[]> {
+    throw new Error('This is my hacky static abstract BS');
+  }
+
+  static deleteModel(id: string): Promise<any> {
     throw new Error('This is my hacky static abstract BS');
   }
 }

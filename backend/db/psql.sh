@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PG_SEARCH_PATH=main
+PG_SEARCH_PATH=stdb
 
 # while getopts ":t:h" opt; do
 #   case $opt in

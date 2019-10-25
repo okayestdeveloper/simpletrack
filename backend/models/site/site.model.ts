@@ -2,6 +2,7 @@ import { pick } from 'lodash';
 import { BaseModel, Validations, SaveableModel } from '../base-model';
 import { ISite } from './site.interface';
 import { db } from '../../db';
+import { QueryResult } from 'pg';
 const SQL = require('sql-template-strings')
 
 export class Site extends BaseModel implements ISite, SaveableModel {
@@ -30,11 +31,11 @@ export class Site extends BaseModel implements ISite, SaveableModel {
   }
 
   set(fields: Partial<ISite>) {
-    Object.assign(this, pick(fields, Site.fields), Site.defaults);
+    Object.assign(this, Site.defaults, pick(fields, Site.fields));
   }
 
   toJSON(): ISite {
-    return Object.assign({}, pick(this, Site.fields), Site.defaults);
+    return Object.assign({}, Site.defaults, pick(this, Site.fields));
   }
 
   clone(): Site {
@@ -42,8 +43,7 @@ export class Site extends BaseModel implements ISite, SaveableModel {
   }
 
   validate(): Validations | null {
-    const err = {};
-    // todo:
+    const err: Validations = {};
     // label is required, has length > 0
     if (typeof this.label != 'string' || !this.label || this.label.length == 0) {
       err.label = 'Site name cannot be empty';
@@ -64,19 +64,20 @@ export class Site extends BaseModel implements ISite, SaveableModel {
   async save(): Promise<Site> {
     if (this.siteId && this.siteId.length) {
       // update
-      const sql = SQL`UPDATE site
+      const sql = SQL`UPDATE stdb.site
         SET label=${this.label},
           description=${this.description},
           address=${this.address}
-        WHERE siteId=${this.siteId}`;
-      const bla = await db.query(sql);
-      console.log('Update site: ', bla);
+        WHERE site_id=${this.siteId}`;
+      const result: QueryResult = await db.query(sql);
+      console.log('Update site: ', result);
     } else {
       // create
-      const sql = SQL`INSERT INTO site(label, description, address)
+      const sql = SQL`INSERT INTO stdb.site(label, description, address)
         VALUES (${this.label}, ${this.description}, ${this.address})
-        RETURNING siteId`;
-      this.siteId = await db.query(sql);
+        RETURNING site_id`;
+      const result: QueryResult = await db.query(sql);
+      console.log('Create site: ', result);
     }
     return this;
   }

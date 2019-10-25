@@ -29,7 +29,12 @@ if [[ -z "$SEED_FILE" ]]; then
    SEED_FILE=./local_seed.sql
 fi
 
-echo "DROP DATABASE simpletrack" | psql postgres
-echo "create database simpletrack with owner stdb_user" | psql postgres
-echo 'create extension if not exists "uuid-ossp"' | psql simpletrack
-pg_restore -j 4 -e -c --if-exists -h localhost -p 5432 -d simpletrack -U stdb_user -O $SEED_FILE
+# echo "DROP DATABASE simpletrack" | psql postgres
+# echo "create database simpletrack with owner stdb_user" | psql postgres
+# echo 'create extension if not exists "uuid-ossp"' | psql simpletrack
+
+# pgdump output
+# pg_restore -j 4 -e -c --if-exists -h localhost -p 5432 -d simpletrack -U stdb_user -O $SEED_FILE
+
+#  "entire db"
+pg_restore -e -O -x -c --if-exists -j 4 -h localhost -p 5432 -U clinics_user -d shared_clinics "$SEED_FILE"

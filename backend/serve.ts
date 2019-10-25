@@ -1,6 +1,6 @@
 const path = require('path');
-require('dotenv').config({ path: path.join('.', `.env.${process.env.SIMPLETRACK_ENV}`) })
-// const express = require('express');
+const envPath = path.join('.', `.env.${process.env.SIMPLETRACK_ENV}`);
+require('dotenv').config({ path: envPath });
 import express, { Application } from 'express';
 const bodyParser = require('body-parser');
 import { mountRoutes } from './routes';
@@ -12,6 +12,7 @@ const app: Application = express();
 // todo some kind of token management
 app.use(bodyParser.json());
 // todo CORS setup
+// todo a middleware to convert camel to snake case and back
 
 // set up routes
 mountRoutes(app);
@@ -20,3 +21,5 @@ mountRoutes(app);
 app.listen(3000, () => {
   console.log('App listening on port 3000!');
 });
+
+// todo: clean exit; db pool.end(), etc.
