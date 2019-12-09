@@ -1,12 +1,12 @@
 import { Site } from './site.model';
 import { ISite } from './site.interface';
-import { BaseModel, ModelFactory } from './../base-model';
+import { ModelFactory } from './../base-model';
 import { db } from '../../db';
 import { QueryResult } from 'pg';
 const SQL = require('sql-template-strings')
 
 export class SiteFactory implements ModelFactory {
-  static async load(id: string): Promise<BaseModel> {
+  static async load(id: string): Promise<Site> {
     const sql = SQL`SELECT * FROM stdb.site WHERE site_id=${id}`;
     const result: QueryResult = await db.query(sql);
     if (result.rowCount !== 1) {
@@ -15,7 +15,7 @@ export class SiteFactory implements ModelFactory {
     return new Site(result.rows[0] as ISite);
   }
 
-  static async loadList(): Promise<BaseModel[]> {
+  static async loadList(): Promise<Site[]> {
     const result: QueryResult = await db.query('SELECT * FROM stdb.site');
     if (result.rowCount === 0) {
       return [];

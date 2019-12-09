@@ -1,7 +1,10 @@
-import { Request, Response } from 'express';
+import { Request, Response,  } from 'express';
+import { ParamsDictionary } from 'express-serve-static-core';
 const Router = require('express-promise-router');
 import { SiteFactory } from './../models/site/site.factory';
 import { Site } from '../models/site/site.model';
+const cors = require('cors');
+import { corsOptions } from '../config';
 
 // create a new express-promise-router
 // this has the same API as the normal express router except
@@ -15,7 +18,8 @@ siteRoutes.get('/', async (req: Request, res: Response) => {
 });
 
 siteRoutes.get('/:id', async (req: Request, res: Response) => {
-  if (!req.param('id')) {
+  const params = req.params as ParamsDictionary;
+  if (!params.id) {
     res.status(400).end();
     return;
   }
@@ -23,7 +27,7 @@ siteRoutes.get('/:id', async (req: Request, res: Response) => {
   res.status(200).send(site);
 });
 
-siteRoutes.post('/', async (req: Request, res: Response) => {
+siteRoutes.post('/', cors(corsOptions), async (req: Request, res: Response) => {
   let site = new Site(req.body);
   const valid = site.validate();
   if (valid !== null) {
@@ -42,14 +46,16 @@ siteRoutes.post('/', async (req: Request, res: Response) => {
   res.status(200).send(site.toJSON());
 });
 
-siteRoutes.put('/:id', async (req: Request, res: Response) => {
-  if (!req.param('id')) {
+siteRoutes.put('/:id', cors(corsOptions), async (req: Request, res: Response) => {
+  const params = req.params as ParamsDictionary;
+  if (!params.id) {
     res.status(400).end();
     return;
   }
 
-  let site = new Site(req.body);
-  site.siteId = req.param('id');
+  let site = await SiteFactory.load(params.id);
+  site.set(req.body);
+  site.siteId = params.id;
   const valid = site.validate();
   if (valid !== null) {
     res.status(400).send(valid);
@@ -68,7 +74,7 @@ siteRoutes.put('/:id', async (req: Request, res: Response) => {
 });
 
 
-siteRoutes.delete('/:id', async (req: Request, res: Response) => {
+siteRoutes.delete('/:id', cors(corsOptions), async (req: Request, res: Response) => {
   if (!req.param('id')) {
     res.status(400).end();
     return;

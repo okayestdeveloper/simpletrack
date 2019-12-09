@@ -4,6 +4,7 @@ import { ISite } from './site.interface';
 import { db } from '../../db';
 import { QueryResult } from 'pg';
 const SQL = require('sql-template-strings')
+const uuidv4 = require('uuid/v4');
 
 export class Site extends BaseModel implements ISite, SaveableModel {
   siteId = '';
@@ -18,6 +19,8 @@ export class Site extends BaseModel implements ISite, SaveableModel {
     address: '',
   };
 
+  // todo: UPDATE this to conform more to what we've got over in LT land. Update isNew, set, reset. Perhaps decorators?
+
   static readonly fields = [
     'siteId',
     'label',
@@ -27,11 +30,16 @@ export class Site extends BaseModel implements ISite, SaveableModel {
 
   constructor(fields: Partial<ISite>) {
     super();
+    this.reset();
     this.set(fields);
   }
 
   set(fields: Partial<ISite>) {
-    Object.assign(this, Site.defaults, pick(fields, Site.fields));
+    Object.assign(this, pick(fields, Site.fields));
+  }
+
+  reset() {
+    Object.assign(this, Site.defaults);
   }
 
   toJSON(): ISite {
@@ -72,10 +80,10 @@ export class Site extends BaseModel implements ISite, SaveableModel {
       const result: QueryResult = await db.query(sql);
       console.log('Update site: ', result);
     } else {
-      // create
-      const sql = SQL`INSERT INTO stdb.site(label, description, address)
-        VALUES (${this.label}, ${this.description}, ${this.address})
-        RETURNING site_id`;
+      // create - it's not auto-generating UUID
+      this.siteId = uuidv4();
+      const sql = SQL`INSERT INTO stdb.site (site_id, label, description, address)
+        VALUES (${this.siteId}, ${this.label}, ${this.description}, ${this.address})`;
       const result: QueryResult = await db.query(sql);
       console.log('Create site: ', result);
     }

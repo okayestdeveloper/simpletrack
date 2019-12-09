@@ -1,6 +1,8 @@
 const path = require('path');
 const envPath = path.join('.', `.env.${process.env.SIMPLETRACK_ENV}`);
 require('dotenv').config({ path: envPath });
+const cors = require('cors');
+import { corsOptions } from './config';
 import express, { Application } from 'express';
 const bodyParser = require('body-parser');
 import { mountRoutes } from './routes';
@@ -12,7 +14,10 @@ const app: Application = express();
 // set up middleware
 // todo some kind of token management/authentication
 app.use(bodyParser.json());
-// todo CORS setup
+
+// CORS setup: https://expressjs.com/en/resources/middleware/cors.html
+// todo: FIRST gotta get these options into routes to configure for cors
+app.use(cors(corsOptions));
 
 // set up routes
 mountRoutes(app);
@@ -35,7 +40,7 @@ process.on('uncaughtException', function (err) {
 });
 
 // kick it
-app.listen(3000, () => {
+app.listen(process.env.SIMPLETRACK_API_PORT, () => {
   console.log('App listening on port 3000!');
 });
 
