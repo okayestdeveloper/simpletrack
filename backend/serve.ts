@@ -13,10 +13,11 @@ const app: Application = express();
 
 // set up middleware
 // todo some kind of token management/authentication
+// look into passport-js https://github.com/jaredhanson/passport
+// google-oauth for login
 app.use(bodyParser.json());
 
 // CORS setup: https://expressjs.com/en/resources/middleware/cors.html
-// todo: FIRST gotta get these options into routes to configure for cors
 app.use(cors(corsOptions));
 
 // set up routes
