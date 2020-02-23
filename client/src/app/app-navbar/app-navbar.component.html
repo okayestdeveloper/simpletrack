@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" role="heading">
+  <h1>Simpletrack</h1>
+  <span class="flex-fill"></span>
+  <button mat-button (click)="goToLogin()" *ngIf="!isLoggedIn">
+    <mat-icon class="medium md-light">input</mat-icon>
+    <span>Login</span>
+  </button>
+  <button mat-button [matMenuTriggerFor]="userMenu">
+    <mat-icon class="medium md-light">perm_identity</mat-icon>
+    <span>{{loggedInUserName}}</span>
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="goToAccount()">Account Settings</button>
+    <button mat-menu-item (click)="goToLogout()">Logout</button>
+  </mat-menu>
+</mat-toolbar>

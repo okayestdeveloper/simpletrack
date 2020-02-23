@@ -42,6 +42,6 @@ process.on('uncaughtException', function (err) {
 
 // kick it
 app.listen(process.env.SIMPLETRACK_API_PORT, () => {
-  console.log('App listening on port 3000!');
+  console.log(`App listening on port ${process.env.SIMPLETRACK_API_PORT}!`);
 });
 
