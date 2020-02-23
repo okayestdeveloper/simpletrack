@@ -5,11 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { AppNavbarComponent } from './app-navbar.component';
+import { StrkNavbarComponent } from './strk-navbar.component';
 
 @NgModule({
   declarations: [
-    AppNavbarComponent,
+    StrkNavbarComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +20,7 @@ import { AppNavbarComponent } from './app-navbar.component';
     MatToolbarModule,
   ],
   exports: [
-    AppNavbarComponent,
+    StrkNavbarComponent,
   ],
 })
-export class AppNavbarModule { }
+export class StrkNavbarModule { }

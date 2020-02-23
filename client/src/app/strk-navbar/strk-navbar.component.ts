@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-app-navbar',
-  templateUrl: './app-navbar.component.html',
-  styleUrls: ['./app-navbar.component.scss'],
+  selector: 'strk-navbar',
+  templateUrl: './strk-navbar.component.html',
+  styleUrls: ['./strk-navbar.component.scss'],
 })
-export class AppNavbarComponent {
+export class StrkNavbarComponent {
 
   constructor(
     private router: Router,
