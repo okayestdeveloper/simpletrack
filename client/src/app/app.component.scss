@@ -1,0 +1,13 @@
+.app-container {
+  position: relative;
+}
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.main-content {
+  position: relative;
+}

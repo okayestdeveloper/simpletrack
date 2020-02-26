@@ -3,9 +3,25 @@
 }
 
 .d-flex {
-  display: flexbox;
+  display: flex !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap !important;
 }
 
 .flex-fill {
   flex: 1 1 auto;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-around {
+  justify-content: space-around;
 }

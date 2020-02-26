@@ -1,5 +1,7 @@
 <mat-toolbar color="primary" role="heading">
-  <h1>Simpletrack</h1>
+  <button mat-button [routerLink]="['/']" routerLinkActive="router-link-active">
+    <h1>Simpletrack</h1>
+  </button>
   <span class="flex-fill"></span>
   <button mat-button (click)="goToLogin()" *ngIf="!isLoggedIn">
     <mat-icon class="medium md-light">exit_to_app</mat-icon>
