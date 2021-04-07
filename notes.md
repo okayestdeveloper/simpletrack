@@ -1,15 +1,34 @@
 TODO: convert backend over to nestjs (https://docs.nestjs.com/first-steps)
 TODO: Convert frontend to react typescript
 
+# authentication thoughts
+
+- Accounts are groups of users, kinda represents a company
+- Users have a login
+- Can users be in multiple accounts? Or would a person need to make separate users in each account? How do we handle super users?
+- A user can be marked as an account owner.
+  - The original account creator is an account owner
+  - Only an account owner can make another account owner
+  - Account owners can modify account details.
+  - Probably going to do OpenID login via passport
+- Users can have access to view sites
+  - Default is all sites under an account
+  - Maybe locations under sites
+- We'll have a granular permission model.
+  - add/edit or delete assets, including types
+  - add/edit or delete sites, grants similar access to all locations in a site
+  - Maybe more as we go along
+
 # objects
 
 ## asset (keg)
 
 - id (barcode value), string pk
 - label, string
-- type id, string
-- location id, string
-- site id, string
+- assetTypeId, string
+- locationId, string
+- siteId, string
+- assetStatusId, string
 
 ## asset status (active, repairing, decommissioned...)
 
