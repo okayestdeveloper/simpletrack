@@ -4,6 +4,11 @@
   "description": "An experiment in simplified asset tracking for nano breweries and other equally small businesses.",
   "license": "SEE LICENSE IN ../LICENSE",
   "private": false,
+  "author": {
+    "name": "Brad Ledbetter",
+    "email": "brad@okayestdeveloper.net",
+    "url": "http://github.com/okayestdeveloper"
+  },
   "scripts": {
     "webpack": "webpack",
     "start": "webpack serve --mode=development",

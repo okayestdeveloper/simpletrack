@@ -1,7 +1,18 @@
 import { Server, Model, belongsTo, hasMany } from "miragejs";
 
 import assetTypes from "./fixtures/asset-types.json";
+import assetStatuses from "./fixtures/asset-statuses.json";
+import assets from "./fixtures/assets.json";
+import locations from "./fixtures/locations.json";
+import sites from "./fixtures/sites.json";
+import users from "./fixtures/users.json";
+
 import assetTypeRoutes from "./routes/asset-types";
+import assetStatusRoutes from "./routes/asset-statuses";
+import assetRoutes from "./routes/assets";
+import locationRoutes from "./routes/locations";
+import siteRoutes from "./routes/sites";
+import userRoutes from "./routes/users";
 
 // import seed data (fixtures) and routes here
 
@@ -25,11 +36,24 @@ function makeServer({ environment = "test" } = {}) {
         site: belongsTo(),
         location: belongsTo(),
       }),
+      site: Model.extend({
+        location: hasMany(),
+      }),
+      location: Model.extend({
+        site: belongsTo(),
+        asset: hasMany(),
+      }),
+      users: Model,
     },
 
     // declare seeds here
     fixtures: {
       assetTypes,
+      assetStatuses,
+      assets,
+      locations,
+      sites,
+      users,
     },
 
     seeds(server) {
@@ -42,6 +66,11 @@ function makeServer({ environment = "test" } = {}) {
       // this.timing = 3000; // uncomment this line to simulate a 3sec network delay
       // wire up routes here
       assetTypeRoutes(this);
+      assetStatusRoutes(this);
+      assetRoutes(this);
+      locationRoutes(this);
+      siteRoutes(this);
+      userRoutes(this);
     },
   });
 }

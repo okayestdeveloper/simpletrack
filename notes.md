@@ -21,14 +21,14 @@ TODO: Convert frontend to react typescript
 
 # objects
 
-## asset (keg)
+## asset-assignment (where some number of assets are)
 
 - id (barcode value), string pk
-- label, string
 - assetTypeId, string
 - locationId, string
 - siteId, string
 - assetStatusId, string
+- quantity
 
 ## asset status (active, repairing, decommissioned...)
 

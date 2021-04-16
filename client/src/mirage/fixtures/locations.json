@@ -1,0 +1,26 @@
+[
+  {
+    "id": "174ae6af-0651-4568-9fab-74d2e19bc2e1",
+    "label": "Inventory cooler",
+    "description": "",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d"
+  },
+  {
+    "id": "51c6e0a8-336c-4d5c-b79e-8e60b30874d2",
+    "label": "Taproom cooler",
+    "description": "",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d"
+  },
+  {
+    "id": "e28bba6a-2a6e-4d55-905c-6f87f829f842",
+    "label": "Clean keg storage",
+    "description": "",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d"
+  },
+  {
+    "id": "5af519ea-f294-4cf7-a993-03064e308f79",
+    "label": "Dirty keg storage",
+    "description": "",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d"
+  }
+]

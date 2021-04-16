@@ -1,0 +1,30 @@
+[
+  {
+    "id": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
+    "label": "active"
+  },
+  {
+    "id": "3c17d2c7-f89f-4b79-9655-dedb766344a0",
+    "label": "committed"
+  },
+  {
+    "id": "6d687d85-81b8-49c2-9847-a50d8fe16d53",
+    "label": "dirty"
+  },
+  {
+    "id": "2b492ce1-ee98-48c8-8adf-5ac9da738201",
+    "label": "repairing"
+  },
+  {
+    "id": "e63e5e5c-3c27-4c5c-88bc-70c16b85bf1c",
+    "label": "damaged"
+  },
+  {
+    "id": "6e29878b-713c-4322-9a84-3c51e9bce529",
+    "label": "decommissioned"
+  },
+  {
+    "id": "806c7223-cb1a-4f41-aa67-33042c65cef7",
+    "label": "at client"
+  }
+]
