@@ -5,38 +5,70 @@
     "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
     "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
     "assetStatusId": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
-    "quantity": 50
+    "tagValue": "0001"
   },
   {
-    "id": "3b66a53b-7dcc-446b-a93d-bfa316381358",
-    "locationId": "5af519ea-f294-4cf7-a993-03064e308f79",
+    "id": "4479a375-d741-4143-9739-801ebb7ef37c",
+    "locationId": "e28bba6a-2a6e-4d55-905c-6f87f829f842",
     "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
     "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
     "assetStatusId": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
-    "quantity": 10
+    "tagValue": "0002"
+  },
+  {
+    "id": "ec57306d-c6f6-43fd-b325-45095f09382f",
+    "locationId": "e28bba6a-2a6e-4d55-905c-6f87f829f842",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
+    "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
+    "assetStatusId": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
+    "tagValue": "0003"
+  },
+  {
+    "id": "4e55b310-3f13-47c6-b6a8-10f768523118",
+    "locationId": "5af519ea-f294-4cf7-a993-03064e308f79",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
+    "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
+    "assetStatusId": "6d687d85-81b8-49c2-9847-a50d8fe16d53",
+    "tagValue": "0004"
+  },
+  {
+    "id": "ff86604e-2bdf-4d80-99f7-a57a29c32408",
+    "locationId": "5af519ea-f294-4cf7-a993-03064e308f79",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
+    "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
+    "assetStatusId": "6d687d85-81b8-49c2-9847-a50d8fe16d53",
+    "tagValue": "0005"
+  },
+  {
+    "id": "9c08a2ef-cb54-4515-85e6-49b505276e37",
+    "locationId": "5af519ea-f294-4cf7-a993-03064e308f79",
+    "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
+    "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
+    "assetStatusId": "6d687d85-81b8-49c2-9847-a50d8fe16d53",
+    "tagValue": "0006"
   },
   {
     "id": "010f7495-f1c2-4d2e-912e-810091282afc",
     "locationId": "51c6e0a8-336c-4d5c-b79e-8e60b30874d2",
     "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
     "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
-    "assetStatusId": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
-    "quantity": 20
+    "assetStatusId": "806c7223-cb1a-4f41-aa67-33042c65cef7",
+    "tagValue": "0007"
   },
   {
     "id": "c2ba4430-47ba-41f0-b8ea-13ac9b0c0455",
     "locationId": "174ae6af-0651-4568-9fab-74d2e19bc2e1",
     "siteId": "24023c8b-b57e-4124-afb7-6e2492f7d30d",
     "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
-    "assetStatusId": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
-    "quantity": 20
+    "assetStatusId": "2fa20f53-0a0d-4d05-9ffa-0339255b8b72",
+    "tagValue": "0008"
   },
   {
     "id": "8313969d-416f-4fc7-9d59-e11c0d22aa2b",
     "locationId": "",
     "siteId": "8c8ec049-c854-4796-8afa-f17e52c59482",
     "assetTypeId": "59ddc6fc-13e0-4458-941d-c77265c97ded",
-    "assetStatusId": "12a4572d-fdd5-4b36-a4ae-61eeb799da5f",
-    "quantity": 1
+    "assetStatusId": "806c7223-cb1a-4f41-aa67-33042c65cef7",
+    "tagValue": "0009"
   }
 ]

@@ -19,8 +19,8 @@ import userRoutes from "./routes/users";
 function makeServer({ environment = "test" } = {}) {
   return new Server({
     environment,
-    urlPrefix: `http://${process.env.REACT_APP_API_HOST}`,
-    namespace: "api",
+    urlPrefix: process.env.BL_APP_API_URL,
+    namespace: "",
 
     // define available models and relationships here
     models: {
