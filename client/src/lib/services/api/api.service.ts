@@ -3,7 +3,7 @@ import "whatwg-fetch";
 import "yet-another-abortcontroller-polyfill";
 
 import { HttpError } from "./httpError.class";
-import { assertIsDefined } from "./asserts";
+import { assertIsDefined } from "../asserts";
 
 /**
  *  Define some common content types so we don't mistype or have to look them up
