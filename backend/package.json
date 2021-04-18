@@ -1,7 +1,13 @@
 {
   "name": "simpletrack_backend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Backend for basic asset tracking",
+  "license": "SEE LICENSE IN ../LICENSE",
+  "author": {
+    "name": "Brad Ledbetter",
+    "email": "brad@okayestdeveloper.net",
+    "url": "http://github.com/okayestdeveloper"
+  },
   "main": "serve.js",
   "scripts": {
     "tsc": "tsc",
@@ -9,11 +15,6 @@
     "debug": "SIMPLETRACK_ENV=local ts-node-dev --inspect --respawn --transpileOnly ./serve.ts",
     "prod": "tsc && node ./build/serve.js"
   },
-  "author": {
-    "name": "Brad Ledbetter",
-    "email": "brad.ledbetter@gmail.com"
-  },
-  "license": "MIT",
   "dependencies": {
     "@types/bluebird": "^3.5.27",
     "@types/express": "^4.17.0",

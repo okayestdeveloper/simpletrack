@@ -1,11 +1,8 @@
 {
   "name": "simpletrack",
-  "version": "0.0.1",
-  "description": "A dirt simple keg tracking software",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.1.0",
+  "description": "An experiment in simplified asset tracking for nano breweries and other equally small businesses.",
+  "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bradledbetter/simpletrack.git"
@@ -16,9 +13,9 @@
   ],
   "author": {
     "name": "Brad Ledbetter",
-    "email": "brad.ledbetter@gmail.com"
+    "email": "brad@okayestdeveloper.net",
+    "url": "http://github.com/okayestdeveloper"
   },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bradledbetter/simpletrack/issues"
   },
