@@ -17,10 +17,12 @@ module.exports = {
     "/styles/",
     "/src/index.tsx",
     "/src/lib/testing/",
+    "src/mirage",
     ".config.(js|ts)",
     ".types.ts",
     ".test.(js|jsx|ts|tsx)",
     ".spec.(js|jsx|ts|tsx)",
+    ".d.ts"
   ],
   watchPlugins: [
     "jest-watch-typeahead/filename",
