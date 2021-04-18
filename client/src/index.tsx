@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import "../styles/tailwind.css";
 import "../styles/index.css";
-import "../styles/bulma.css";
 import App from "./App";
 
 // NOTE: do not put any layout here. This file is for main app configuration.
