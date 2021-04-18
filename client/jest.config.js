@@ -1,5 +1,6 @@
 module.exports = {
   verbose: true,
+  moduleDirectories: ['node_modules', 'src'],
   setupFilesAfterEnv: ["./src/setupTests.ts"],
   clearMocks: true,
   collectCoverage: true,
