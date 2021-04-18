@@ -1,6 +1,6 @@
 import request, { APIOptions, APIResponse, ContentType } from "./api.service";
 import { HttpError } from "./httpError.class";
-import mockLocalStorage from "./testing/localstorage.mock";
+import mockLocalStorage from "../../testing/localstorage.mock";
 import download from "downloadjs";
 jest.mock("downloadjs");
 
