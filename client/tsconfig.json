@@ -19,5 +19,8 @@
     "downlevelIteration": true,
     "noEmit": false
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "src/mirage"
+  ]
 }
