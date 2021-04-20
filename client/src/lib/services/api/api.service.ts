@@ -1,9 +1,9 @@
-import download from "downloadjs";
-import "whatwg-fetch";
-import "yet-another-abortcontroller-polyfill";
+import download from 'downloadjs';
+import 'whatwg-fetch';
+import 'yet-another-abortcontroller-polyfill';
 
-import { HttpError } from "./httpError.class";
-import { assertIsDefined } from "../asserts";
+import { HttpError } from './httpError.class';
+import { assertIsDefined } from '../asserts';
 
 /**
  *  Define some common content types so we don't mistype or have to look them up
@@ -11,19 +11,19 @@ import { assertIsDefined } from "../asserts";
  * @enum {string}
  */
 export enum ContentType {
-  CSV = "text/csv",
-  CSS = "text/css",
-  DOC = "application/msword",
-  DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  FORM_DATA = "multipart/form-data",
-  HTML = "text/html",
-  JSON = "application/json",
-  PDF = "application/pdf",
-  TEXT = "text/plain",
-  XLS = "application/vnd.ms-excel",
-  XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  XML = "application/xml",
-  DEFAULT = "application/octet-stream",
+  CSV = 'text/csv',
+  CSS = 'text/css',
+  DOC = 'application/msword',
+  DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  FORM_DATA = 'multipart/form-data',
+  HTML = 'text/html',
+  JSON = 'application/json',
+  PDF = 'application/pdf',
+  TEXT = 'text/plain',
+  XLS = 'application/vnd.ms-excel',
+  XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  XML = 'application/xml',
+  DEFAULT = 'application/octet-stream',
 }
 
 /**
@@ -38,7 +38,7 @@ export interface APIOptions {
   body?: Record<string, any>;
 
   /** method: the request method. Default is GET */
-  method: "GET" | "POST" | "PUT" | "DELETE" | "HEAD" | "PATCH";
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'HEAD' | 'PATCH';
 
   /** queryParams: A key-value set of optional query string parameters. If this
    * is present, the request function will build the querystring for you. */
@@ -57,10 +57,10 @@ export interface APIOptions {
  * Default options for if you don't pass in an object.
  */
 const defaultOptions: APIOptions = {
-  method: "GET",
+  method: 'GET',
   headers: {
     accept: ContentType.JSON,
-    "content-type": ContentType.JSON,
+    'content-type': ContentType.JSON,
   },
 };
 
@@ -91,7 +91,7 @@ export interface APIResponse<T> {
 function apiUrl(path: string): string {
   const baseUrl = process.env.BL_APP_API_URL;
 
-  return `${baseUrl}${path[0] === "/" ? "" : "/"}${path}`;
+  return `${baseUrl}${path[0] === '/' ? '' : '/'}${path}`;
 }
 
 /**
@@ -104,12 +104,12 @@ function queryParamsToString(params: Record<string, string>): string {
   const keys = Object.keys(params);
 
   if (keys.length === 0) {
-    return "";
+    return '';
   }
 
   return keys
     .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-    .join("&");
+    .join('&');
 }
 
 /**
@@ -124,7 +124,7 @@ function appendQueryString(url: string, queryString: string): string {
     return url;
   }
 
-  if (url.includes("?")) {
+  if (url.includes('?')) {
     return `${url}&${queryString}`;
   }
 
@@ -139,12 +139,12 @@ function appendQueryString(url: string, queryString: string): string {
  * @returns {string}
  */
 function filenameFromResponse(res: Response, defaultName: string): string {
-  if (res.headers.has("content-disposition")) {
-    const disposition = res.headers.get("content-disposition");
-    const tokens = disposition?.split("; ") ?? [];
+  if (res.headers.has('content-disposition')) {
+    const disposition = res.headers.get('content-disposition');
+    const tokens = disposition?.split('; ') ?? [];
 
     if (tokens.length > 1 && /^filename=/.test(tokens[1])) {
-      const fileParts = tokens[1].split("=");
+      const fileParts = tokens[1].split('=');
 
       if (fileParts.length > 1) {
         return fileParts[1];
@@ -161,7 +161,7 @@ function filenameFromResponse(res: Response, defaultName: string): string {
  * @param {Response} res
  */
 async function downloadFile(res: Response): Promise<null> {
-  const filename = filenameFromResponse(res, "download");
+  const filename = filenameFromResponse(res, 'download');
   const blob = await res.blob();
   download(blob, filename);
 
@@ -175,10 +175,10 @@ async function downloadFile(res: Response): Promise<null> {
  * @returns {string}
  */
 function getContentType(res: Response): string {
-  let contentType = res.headers.get("content-type") ?? ContentType.DEFAULT;
+  let contentType = res.headers.get('content-type') ?? ContentType.DEFAULT;
 
-  if (contentType.includes(";")) {
-    const tokens = contentType.split(";");
+  if (contentType.includes(';')) {
+    const tokens = contentType.split(';');
     contentType = tokens[0].trim();
   }
 
@@ -198,9 +198,9 @@ function getContentType(res: Response): string {
  * @throws if any of the Response's decoding methods throws.
  */
 async function getBody<T>(res: Response): Promise<APIResponse<T> | null> {
-  const contentLength = parseInt(res.headers.get("content-length") ?? "0");
+  const contentLength = parseInt(res.headers.get('content-length') ?? '0');
 
-  if (contentLength === 0 && res.headers.has("content-length")) {
+  if (contentLength === 0 && res.headers.has('content-length')) {
     return null;
   }
 
@@ -208,28 +208,28 @@ async function getBody<T>(res: Response): Promise<APIResponse<T> | null> {
   const contentType = getContentType(res);
 
   switch (contentType) {
-    case ContentType.JSON:
-      const body = (await res.json()) as APIResponse<T>;
+  case ContentType.JSON:
+    const body = (await res.json()) as APIResponse<T>;
 
-      return body;
-    case ContentType.CSS:
-    case ContentType.HTML:
-    case ContentType.TEXT:
-    case ContentType.XML:
-      // todo: we're losing some type saftey here because I can't figure out the right typing for the return value that
-      // doesn't break functions that call request<SomeType>. This should work just fine, but it's a hacky way to get
-      // around the TypeScript compiler and my lack of knowledge around the advanced edges of TypeScript
-      data = ((await res.text()) as any) as T;
-      break;
-    case ContentType.FORM_DATA:
-      data = ((await res.formData()) as any) as T;
-      break;
-    default:
-      data = ((await res.arrayBuffer()) as any) as T;
-      break;
+    return body;
+  case ContentType.CSS:
+  case ContentType.HTML:
+  case ContentType.TEXT:
+  case ContentType.XML:
+    // todo: we're losing some type saftey here because I can't figure out the right typing for the return value that
+    // doesn't break functions that call request<SomeType>. This should work just fine, but it's a hacky way to get
+    // around the TypeScript compiler and my lack of knowledge around the advanced edges of TypeScript
+    data = ((await res.text()) as any) as T;
+    break;
+  case ContentType.FORM_DATA:
+    data = ((await res.formData()) as any) as T;
+    break;
+  default:
+    data = ((await res.arrayBuffer()) as any) as T;
+    break;
   }
 
-  return { data, message: "" };
+  return { data, message: '' };
 }
 
 /**
@@ -243,18 +243,18 @@ async function getBody<T>(res: Response): Promise<APIResponse<T> | null> {
  * resolved with body data or null on success.
  */
 async function handleAPIResponse<T>(res: Response): Promise<T | null> {
-  if (res.headers.get("content-disposition")?.startsWith("attachment")) {
+  if (res.headers.get('content-disposition')?.startsWith('attachment')) {
     return downloadFile(res);
   }
 
   const body = await getBody<T>(res);
 
   if (!res.ok) {
-    const message = body?.message ?? "";
+    const message = body?.message ?? '';
     throw new HttpError(
       res.status,
       res.statusText,
-      `API request failed. ${res.status} ${res.statusText}. ${message}`
+      `API request failed. ${res.status} ${res.statusText}. ${message}`,
     );
   }
 
@@ -262,7 +262,7 @@ async function handleAPIResponse<T>(res: Response): Promise<T | null> {
     return null;
   }
 
-  if (typeof body.data !== "undefined") {
+  if (typeof body.data !== 'undefined') {
     return body.data;
   }
 
@@ -279,11 +279,11 @@ function getAuthorizationToken(): string {
   assertIsDefined(process.env.BL_APP_AUTH_TOKEN_STORAGE_KEY);
 
   const token = window.localStorage.getItem(
-    process.env.BL_APP_AUTH_TOKEN_STORAGE_KEY
+    process.env.BL_APP_AUTH_TOKEN_STORAGE_KEY,
   );
 
   if (!token) {
-    throw new Error("Authorization token is empty or not set");
+    throw new Error('Authorization token is empty or not set');
   }
 
   return token;
@@ -301,7 +301,7 @@ function getAuthorizationToken(): string {
  */
 async function request<T>(
   path: string,
-  options: APIOptions = defaultOptions
+  options: APIOptions = defaultOptions,
 ): Promise<T | null> {
   const { body, method, queryParams, headers = {}, signal } = {
     ...defaultOptions,
@@ -318,14 +318,14 @@ async function request<T>(
   let requestBody: any;
 
   if (
-    ["POST", "PUT"].includes(method) &&
+    [ 'POST', 'PUT' ].includes(method) &&
     !!body &&
-    headers["content-type"] === ContentType.JSON
+    headers['content-type'] === ContentType.JSON
   ) {
     requestBody = JSON.stringify(body);
   } else {
-    if (headers["content-type"] === ContentType.FORM_DATA) {
-      delete headers["content-type"];
+    if (headers['content-type'] === ContentType.FORM_DATA) {
+      delete headers['content-type'];
     }
 
     requestBody = body;

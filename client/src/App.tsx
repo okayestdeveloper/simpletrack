@@ -1,14 +1,22 @@
-import { Route, Switch } from "react-router";
+import { Switch } from 'react-router';
+
+import AppRoute from 'routing/AppRoute';
 
 function App() {
   return (
     <Switch>
-      <Route path="/">
-        <h1 className="title">App goes here</h1>
-        <p className="subtitle">
-          This <strong>is</strong> a subtitle.
-        </p>
-      </Route>
+      <AppRoute path="/" title="Login" authRequired={false} exact>
+        <div className="login-page">
+          <h1 className="title">Login</h1>
+          <p>todo:</p>
+        </div>
+      </AppRoute>
+      <AppRoute path="/dashboard" title="Dashboard" authRequired={false}>
+        <div className="dashboard-page">
+          <h1 className="title">Dashboard</h1>
+          <p>todo:</p>
+        </div>
+      </AppRoute>
     </Switch>
   );
 }

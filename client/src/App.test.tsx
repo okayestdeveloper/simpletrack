@@ -1,17 +1,33 @@
-import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
-import { render } from "@testing-library/react";
+import { createMemoryHistory, MemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+import { render } from '@testing-library/react';
 
-import App from "./App";
+import App from './App';
 
-describe("App", () => {
-  it("should render a thing", () => {
-    const history = createMemoryHistory({ initialEntries: ["/"] });
-    const { getByText } = render(
-      <Router history={history}>
-        <App></App>
-      </Router>
-    );
-    expect(getByText("App goes here")).toBeInTheDocument();
+function makeHistory(initialEntries = [ '/' ]) {
+  return createMemoryHistory({ initialEntries });
+}
+
+interface RenderParams {
+  history?: MemoryHistory;
+}
+
+function renderApp({ history = makeHistory() }: RenderParams = {}) {
+  return render(
+    <Router history={history}>
+      <App />
+    </Router>,
+  );
+}
+
+describe('App', () => {
+  it.each([
+    [ 'Login', '/', '.login-page' ],
+    [ 'Dashboard', '/dashboard', '.dashboard-page' ],
+  ])('should render the %s page when route is "%s"', (name, path, selector) => {
+    const history = makeHistory([ path ]);
+    const { container } = renderApp({ history });
+
+    expect(container.querySelector(selector)).toBeInTheDocument();
   });
 });
