@@ -2,9 +2,25 @@ const dotenv = require("dotenv");
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { DefinePlugin, HotModuleReplacementPlugin } = require("webpack");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const isEnvDevelopment = process.env.NODE_ENV === "development";
 const isEnvProduction = process.env.NODE_ENV === "production";
+const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
+const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+const hasJsxRuntime = (() => {
+  if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
+    return false;
+  }
+
+  try {
+    require.resolve('react/jsx-runtime');
+    return true;
+  } catch (e) {
+    return false;
+  }
+})();
 
 function getEnvironment() {
   const config = dotenv.config({
@@ -50,6 +66,7 @@ module.exports = () => {
       filename: "bundle.js",
     },
     resolve: {
+      modules: ['node_modules', 'src'], // todo: resolve this from tsconfig.json
       extensions: [".tsx", ".ts", ".js"],
     },
     target: isEnvDevelopment ? "web" : "browserslist",
@@ -81,7 +98,33 @@ module.exports = () => {
         template: path.join(__dirname, "public", "index.html"),
       }),
       new DefinePlugin(mappedEnvironment),
+      // todo: this breaks prod build. Probably pull out plugins to a function or something and optional push things
       isEnvDevelopment && new HotModuleReplacementPlugin(),
+      // todo: this doesn't appear to do anything
+      !disableESLintPlugin &&
+        new ESLintPlugin({
+          // Plugin options
+          extensions: ['js', 'jsx', 'ts', 'tsx'],
+          formatter: require.resolve('react-dev-utils/eslintFormatter'),
+          eslintPath: require.resolve('eslint'),
+          failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+          context: 'src',
+          cache: true,
+          cacheLocation: path.resolve(
+            'node_modules',
+            '.cache/.eslintcache'
+          ),
+          lintDirtyModulesOnly: true,
+          // ESLint class options
+          cwd: path.resolve('./'),
+          resolvePluginsRelativeTo: __dirname,
+          baseConfig: {
+            extends: [require.resolve('eslint-config-react-app/base')],
+            rules: {
+              ...(!hasJsxRuntime ? { 'react/react-in-jsx-scope': 'error' } : {}),
+            },
+          },
+        }),
     ],
     devServer: {
       clientLogLevel: "none",
