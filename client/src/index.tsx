@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import '../styles/tailwind.css';
+import '../styles/bulma.css';
 import '../styles/index.css';
 import App from './App';
 

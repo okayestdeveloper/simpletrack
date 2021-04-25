@@ -12,9 +12,9 @@ function SiteSearch() {
   }
 
   return (
-    <div className="site-search">
-      <input type="text" value={value} onChange={onChange} />
-      <button type="button" className="" onClick={handleSearch}>Search</button>
+    <div className="site-search control flex w-full">
+      <input type="text" className="w-3/4 input rounded-r-none" value={value} onChange={onChange} />
+      <button type="button" className="w-1/4 button border-l-0 rounded-l-none" onClick={handleSearch}>Search</button>
     </div>
   );
 }
